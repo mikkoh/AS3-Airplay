@@ -5,7 +5,6 @@ with no Native Extensions. There are two major parts to the library:
 
 * The Device-
 The device is what you use to connect and control an Apple tv or another Airplay device.
-
 * The WebServer-
 The webserver implementation is very basic currently and really only properly streams videos using "206 Partial Content"
 on Safari browsers (desktop and mobile). The WebServer is only really used when you want to stream videos to an Apple TV
