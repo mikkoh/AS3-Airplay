@@ -52,7 +52,8 @@ package com.mikkoh.airplay.data.returnvalues
 					}
 					else
 					{
-						throw new Error("Undefined key");
+						//throw new Error("Undefined key: ", key);
+						trace("Undefined key: ", key);
 					}
 				}
 			}

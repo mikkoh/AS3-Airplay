@@ -7,9 +7,12 @@ package com.mikkoh.airplay.client
 	import flash.events.ProgressEvent;
 	import flash.net.Socket;
 	import flash.utils.ByteArray;
-
-	//https://github.com/benvanik/node-airplay/blob/master/lib/airplay/client.js
 	
+	/**
+	 * Client is 
+	 * 
+	 * @author Mikko Haapoja
+	 */	
 	public class Client
 	{
 		private var socket:Socket;

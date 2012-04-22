@@ -102,6 +102,11 @@ package com.mikkoh.airplay.device
 			doGet("/scrub", callBack, DataPosition.ID);
 		}
 		
+		public function seek(position:Number, callBack:Function):void
+		{
+			doPost("/scrub?position="+position, null, callBack);
+		}
+		
 		private function onClientConnet(resp:ClientResponse):void
 		{
 			this.client.get('/server-info', onServerInfo);
