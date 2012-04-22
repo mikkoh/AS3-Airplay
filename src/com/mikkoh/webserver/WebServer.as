@@ -18,6 +18,13 @@ package com.mikkoh.webserver
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
 
+	/**
+	 * This is a simple WebServer implementation in AS3. It can only however stream videos properly to
+	 * Safari browsers (desktop and mobile)
+	 *  
+	 * @author mikkohaapoja
+	 * 
+	 */	
 	public class WebServer
 	{
 		[Embed(source="../assets/favicon.ico", mimeType="application/octet-stream")]
@@ -36,9 +43,14 @@ package com.mikkoh.webserver
 		private var returnMime:String;
 		private var returnFile:String; 
 		
-		
-		
-		
+		/**
+		 * This is a simple WebServer implementation in AS3. It can only however stream videos properly to
+	     * Safari browsers (desktop and mobile) 
+		 *  
+		 * @param rootDirectory This is the directory where files will be served from
+		 * @param port The port that will bind to
+		 * 
+		 */		
 		public function WebServer(rootDirectory:File, port:int=8080)
 		{
 			if(!rootDirectory.isDirectory)
@@ -53,11 +65,21 @@ package com.mikkoh.webserver
 			server.listen();
 		}
 		
+		/**
+		 * You can setup which mimetypes the server will support.
+		 *  
+		 * @param mimeTypes This is contain which mimetypes this server will support
+		 * 
+		 */		
 		public function setMimeTypes(mimeTypes:MimeType):void
 		{
 			this.mimeType=mimeTypes;
 		}
 		
+		/**
+		 * This function will close and kill the web server. 
+		 * 
+		 */		
 		public function close():void
 		{
 			server.close();

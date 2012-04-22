@@ -9,7 +9,8 @@ package com.mikkoh.airplay.client
 	import flash.utils.ByteArray;
 	
 	/**
-	 * Client is 
+	 * Client is a utility class used to communicate with iDevices. You should not use Client directly but
+	 * rather instantiate and use Device which uses Client.
 	 * 
 	 * @author Mikko Haapoja
 	 */	
