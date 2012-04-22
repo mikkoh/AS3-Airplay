@@ -58,6 +58,11 @@ package com.mikkoh.webserver
 			this.mimeType=mimeTypes;
 		}
 		
+		public function close():void
+		{
+			server.close();
+		}
+		
 		private function onConnect(ev:ServerSocketConnectEvent):void
 		{
 			var socket:Socket=ev.socket;
@@ -80,19 +85,13 @@ package com.mikkoh.webserver
 			var headerObj:Object={};
 			var numHeader:int=(headerSplit.length-1)/2;
 			
-			trace(headerSplit[0], "\n\n");
-			
 			for(var i:int=0;i<numHeader;i++) 
 			{
 				var keyIdx:int=i*2+1;
 				var valueIdx:int=i*2+2;
 				
-				trace(headerSplit[keyIdx], "-", headerSplit[valueIdx]);
-				
 				headerObj[headerSplit[keyIdx]]=headerSplit[valueIdx];
 			}
-			
-			trace("\n\n");
 			
 			var requestType:String=headerSplit[0].substring(0, header.indexOf(" "));
 			var connection:String=headerObj["Connection"];
@@ -122,34 +121,19 @@ package com.mikkoh.webserver
 				
 				default:
 					trace("OH NO DEFINE |"+requestType+"|");
-					break;
+				break;
 			}
-		
-			
-//			//ASK FOR DATA			
-//			GET /vid.mp4 HTTP/1.1
-//			Host: localhost:8080
-//			Connection: keep-alive
-//			User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.63 Safari/535.7
-//			Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-//			Accept-Encoding: gzip,deflate,sdch
-//			Accept-Language: en-US,en;q=0.8
-//			Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3
 		}
 		
 		private function onSocketClose(ev:Event):void
 		{
 			var socket:Socket=Socket(ev.target);
 		
-			trace("SOCKET CLOSE");
-			
 			server.close();
 		}
 		
 		private function get(socket:Socket, filePath:String, headers:Object, range:Array=null):void
 		{
-			trace("DO GET");
-			
 			returnFile=filePath;
 			
 			var file:File=root.resolvePath(returnFile.toLowerCase());
@@ -168,14 +152,9 @@ package com.mikkoh.webserver
 				fs.readBytes(returnData);
 				fs.close();
 				
-				socket.addEventListener(OutputProgressEvent.OUTPUT_PROGRESS, onOutProgress);
-				
 				//check if we should send in parts
 				if(returnData.length>MAX_PACKET)
 				{
-					trace("WENT IN 1");
-					
-					
 					if(headers["User-Agent"]!=null && headers["User-Agent"].indexOf("QuickTime")!=-1)
 					{
 						returnHeader="HTTP/1.1 200 OK\r\n";
@@ -223,8 +202,6 @@ package com.mikkoh.webserver
 				}
 				else
 				{
-					trace("WENT IN 2");
-					
 					returnHeader="HTTP/1.1 200 OK\r\n";
 					returnHeader+="Content-Type: "+returnMime+"\r\n";
 					returnHeader+="Content-Length: "+returnData.length+"\r\n\r\n";
@@ -237,8 +214,6 @@ package com.mikkoh.webserver
 			}
 			else if(fileExtension=="ico")
 			{
-				trace("ASK ICO");
-				
 				DEFAULT_ICO.position=0;
 				
 				returnHeader="HTTP/1.1 200 OK\r\n";
@@ -254,21 +229,6 @@ package com.mikkoh.webserver
 				returnHeader+="<html><body><h1>DOH NO FILE FOUND</h1></body></html>";
 				socket.flush();	
 			}
-		}
-		
-		private function onOutProgress(ev:OutputProgressEvent):void
-		{
-			var socket:Socket=Socket(ev.target);
-			
-			trace("Bytes Left:", ev.bytesPending, returnData==null);
-			
-			
-			/*
-			if(callCount==0 || callCount==1 && ev.bytesPending==0)
-			{
-				socket.close();
-			}
-			*/
 		}
 	}
 }
