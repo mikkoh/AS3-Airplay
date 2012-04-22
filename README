@@ -24,5 +24,5 @@ AS3 Airplay is based on the Node JS implementation of Airplay. Those who have
 used it will find the architecture to be very similar but more AS3ishy.
  
 Check out the Node JS implementation of Airplay here:
-https://github.com/benvanik/node-airplay/blob/master/lib/airplay/client.js 
+https://github.com/benvanik/node-airplay
 
