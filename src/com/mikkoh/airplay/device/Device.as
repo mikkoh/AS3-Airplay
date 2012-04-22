@@ -1,7 +1,7 @@
 package com.mikkoh.airplay.device
 {
-	import com.mikkoh.airplay.Client;
-	import com.mikkoh.airplay.ClientResponse;
+	import com.mikkoh.airplay.client.Client;
+	import com.mikkoh.airplay.client.ClientResponse;
 	import com.mikkoh.airplay.data.DeviceInfo;
 	import com.mikkoh.airplay.data.ServerInfo;
 	import com.mikkoh.airplay.data.returnvalues.DataPosition;

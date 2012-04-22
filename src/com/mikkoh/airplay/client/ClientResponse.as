@@ -1,4 +1,4 @@
-package com.mikkoh.airplay
+package com.mikkoh.airplay.client
 {
 	public class ClientResponse
 	{
